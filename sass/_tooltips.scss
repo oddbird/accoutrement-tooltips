@@ -1,0 +1,112 @@
+// Tooltips
+// ========
+
+$tooltips: (
+  position: top right,
+  container: '.tooltip',
+  content: '.tooltip-text',
+  hide: (
+    display: none,
+  ),
+  show: (
+    display: block,
+    z-index: 900,
+  ),
+);
+
+
+// Tooltip
+// -------
+@mixin tooltip(
+  $pos: map-get($tooltips, position)
+) {
+  $extends: _tooltip($pos);
+
+  #{map-get($tooltips, content)} {
+    @extend #{$extends};
+    @content;
+  }
+}
+
+
+@function _tooltip(
+  $pos: map-get($tooltips, position)
+) {
+  $x: null;
+  $y: null;
+
+  @each $side in $pos {
+    $x: if($side == left or $side == right, $side, $x);
+    $y: if($side == top or $side == bottom, $side, $y);
+  }
+
+  $extends: '%tooltip' + if($y, '-#{$y}', '') + if($x, '-#{$x}', '');
+
+  @return $extends;
+}
+
+
+// Tooltips
+// --------
+@mixin tooltips {
+  #{map-get($tooltips, container)} {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    &:hover #{map-get($tooltips, content)} {
+      @include render(map-get($tooltips, show));
+    }
+  }
+
+  #{map-get($tooltips, content)} {
+    @include render(map-get($tooltips, hide));
+    position: absolute;
+    white-space: nowrap;
+    pointer-events: none;
+    @content;
+
+    &[data-tooltip] { @include before(attr(data-tooltip)); }
+  }
+}
+
+
+// Placeholders
+// ------------
+
+%tooltip-top {
+  bottom: 100%;
+}
+
+%tooltip-top-left {
+  @extend %tooltip-top;
+  right: 0;
+}
+
+%tooltip-top-right {
+  @extend %tooltip-top;
+  left: 0;
+}
+
+%tooltip-bottom {
+  top: 100%;
+}
+
+%tooltip-bottom-left {
+  @extend %tooltip-bottom;
+  right: 0;
+}
+
+%tooltip-bottom-right {
+  @extend %tooltip-bottom;
+  left: 0;
+}
+
+%tooltip-right {
+  top: 0;
+  left: 100%;
+}
+
+%tooltip-left {
+  top: 0;
+  right: 100%;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "accoutrement-tooltips",
+  "version": "1.0.0",
+  "homepage": "https://github.com/oddbird/accoutrement-tooltips",
+  "authors": [
+    "Eric M. Suzanne"
+  ],
+  "description": "Sass helpers for creating and positioning tooltips",
+  "main": "sass/_tooltips.scss",
+  "keywords": [
+    "sass",
+    "css",
+    "accoutrement"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
