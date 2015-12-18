@@ -1,8 +1,5 @@
 accoutrement-tooltips
 =====================
 
-Sass helpers for creating and positioning tooltips 
-
-## Installation
-
-``bower install accoutrement-tooltips``
+This module is no longer being actively maintained,
+and will be removed.
